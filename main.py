@@ -2,30 +2,10 @@ from typing import *
 import fractions as fr
 
 
-class Vector:
-    """A vector of R^n denoted by a list
-
-    elements: the numbers of a vector
-    """
-    elements: List[fr.Fraction]
-
-    def __init__(self, elements: list[float]) -> None:
-        for i in range(len(elements)):
-            elements[i] = fr.Fraction(elements[i]).limit_denominator()
-
-        self.elements = elements
-
-    def __str__(self) -> str:
-        return str(self.elements)
-
-
 class Matrix:
     """A matrix like in linear algebra
-
     _elements: the elements in a matrix denoted as a list of lists.
-
     _augmented: whether the last column is augmented or not.
-
     Follows Matrix[row_num][col_num]
     """
     _elements: List[List[fr.Fraction]]
@@ -50,7 +30,6 @@ class Matrix:
                 s = s.strip()
                 s += ']\n'
             return s
-
         else:
             s = ""
             for row in self._elements:
@@ -60,17 +39,8 @@ class Matrix:
                 s += "| {}]\n".format(str(row[-1]))
             return s
 
-    # def _to_int(self):
-    #     """Converts all the elements to ints. Done for testing and readability
-    #     only"""
-    #     for row in self._elements:
-    #         for col_num in range(len(row)):
-    #             row[col_num] = int(row[col_num])
-    #     return self
-
     def row_reduce(self) -> None:
         """Mutates this matrix into its row reduced echelon form
-
         Augmented determines whether the last column of the matrix is considered
         the constant part of a system of linear equations. True for yes, False
         for no."""
